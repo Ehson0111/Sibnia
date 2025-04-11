@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище sibnia_practicaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AerodinamicheskieTruby">
+          <Key>
+            <PropertyRef Name="id_truba" />
+          </Key>
+          <Property Name="id_truba" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazvanie_truby" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Graduirovki">
+          <Key>
+            <PropertyRef Name="id_graduirovka" />
+          </Key>
+          <Property Name="id_graduirovka" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_vesy" Type="int" />
+          <Property Name="nazvanie_graduirovki" Type="varchar" MaxLength="21" />
+          <Property Name="data_graduirovki" Type="date" />
+          <Property Name="dannye" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ModeliSamolyotov">
+          <Key>
+            <PropertyRef Name="id_model" />
+          </Key>
+          <Property Name="id_model" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazvanie_modeli" Type="varchar" MaxLength="50" />
+          <Property Name="nomer_modeli" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="SvyazVesyModeli">
+          <Key>
+            <PropertyRef Name="id_vesy" />
+            <PropertyRef Name="id_model" />
+          </Key>
+          <Property Name="id_vesy" Type="int" Nullable="false" />
+          <Property Name="id_model" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SvyazVesyVinty">
+          <Key>
+            <PropertyRef Name="id_vesy" />
+            <PropertyRef Name="id_vint" />
+          </Key>
+          <Property Name="id_vesy" Type="int" Nullable="false" />
+          <Property Name="id_vint" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tip_vesov">
+          <Key>
+            <PropertyRef Name="id_tip_vesov" />
+          </Key>
+          <Property Name="id_tip_vesov" Type="int" Nullable="false" />
+          <Property Name="tip_vesov" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Vesy">
+          <Key>
+            <PropertyRef Name="id_vesy" />
+          </Key>
+          <Property Name="id_vesy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazvanie_vesov" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_truba" Type="int" />
+          <Property Name="kolichestvo_komponent" Type="int" />
+          <Property Name="komponenty" Type="varchar" MaxLength="20" />
+          <Property Name="put_pasporta" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="put_chertezha" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="id_tip_vesov" Type="int" />
+        </EntityType>
+        <EntityType Name="Vinty">
+          <Key>
+            <PropertyRef Name="id_vint" />
+          </Key>
+          <Property Name="id_vint" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomer_vinta" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <Association Name="FK_Graduirovki_Vesy">
+          <End Role="Vesy" Type="Self.Vesy" Multiplicity="0..1" />
+          <End Role="Graduirovki" Type="Self.Graduirovki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vesy">
+              <PropertyRef Name="id_vesy" />
+            </Principal>
+            <Dependent Role="Graduirovki">
+              <PropertyRef Name="id_vesy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SvyazVesyModeli_Modeli">
+          <End Role="ModeliSamolyotov" Type="Self.ModeliSamolyotov" Multiplicity="1" />
+          <End Role="SvyazVesyModeli" Type="Self.SvyazVesyModeli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModeliSamolyotov">
+              <PropertyRef Name="id_model" />
+            </Principal>
+            <Dependent Role="SvyazVesyModeli">
+              <PropertyRef Name="id_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SvyazVesyModeli_Vesy">
+          <End Role="Vesy" Type="Self.Vesy" Multiplicity="1" />
+          <End Role="SvyazVesyModeli" Type="Self.SvyazVesyModeli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vesy">
+              <PropertyRef Name="id_vesy" />
+            </Principal>
+            <Dependent Role="SvyazVesyModeli">
+              <PropertyRef Name="id_vesy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SvyazVesyVinty_Vesy">
+          <End Role="Vesy" Type="Self.Vesy" Multiplicity="1" />
+          <End Role="SvyazVesyVinty" Type="Self.SvyazVesyVinty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vesy">
+              <PropertyRef Name="id_vesy" />
+            </Principal>
+            <Dependent Role="SvyazVesyVinty">
+              <PropertyRef Name="id_vesy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SvyazVesyVinty_Vinty">
+          <End Role="Vinty" Type="Self.Vinty" Multiplicity="1" />
+          <End Role="SvyazVesyVinty" Type="Self.SvyazVesyVinty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vinty">
+              <PropertyRef Name="id_vint" />
+            </Principal>
+            <Dependent Role="SvyazVesyVinty">
+              <PropertyRef Name="id_vint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vesy_tip_vesov">
+          <End Role="tip_vesov" Type="Self.tip_vesov" Multiplicity="0..1" />
+          <End Role="Vesy" Type="Self.Vesy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tip_vesov">
+              <PropertyRef Name="id_tip_vesov" />
+            </Principal>
+            <Dependent Role="Vesy">
+              <PropertyRef Name="id_tip_vesov" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vesy_Truba">
+          <End Role="AerodinamicheskieTruby" Type="Self.AerodinamicheskieTruby" Multiplicity="0..1" />
+          <End Role="Vesy" Type="Self.Vesy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AerodinamicheskieTruby">
+              <PropertyRef Name="id_truba" />
+            </Principal>
+            <Dependent Role="Vesy">
+              <PropertyRef Name="id_truba" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище sibnia_practicaModelContainer">
+          <EntitySet Name="AerodinamicheskieTruby" EntityType="Self.AerodinamicheskieTruby" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Graduirovki" EntityType="Self.Graduirovki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModeliSamolyotov" EntityType="Self.ModeliSamolyotov" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SvyazVesyModeli" EntityType="Self.SvyazVesyModeli" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SvyazVesyVinty" EntityType="Self.SvyazVesyVinty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tip_vesov" EntityType="Self.tip_vesov" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vesy" EntityType="Self.Vesy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vinty" EntityType="Self.Vinty" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Graduirovki_Vesy" Association="Self.FK_Graduirovki_Vesy">
+            <End Role="Vesy" EntitySet="Vesy" />
+            <End Role="Graduirovki" EntitySet="Graduirovki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SvyazVesyModeli_Modeli" Association="Self.FK_SvyazVesyModeli_Modeli">
+            <End Role="ModeliSamolyotov" EntitySet="ModeliSamolyotov" />
+            <End Role="SvyazVesyModeli" EntitySet="SvyazVesyModeli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SvyazVesyModeli_Vesy" Association="Self.FK_SvyazVesyModeli_Vesy">
+            <End Role="Vesy" EntitySet="Vesy" />
+            <End Role="SvyazVesyModeli" EntitySet="SvyazVesyModeli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SvyazVesyVinty_Vesy" Association="Self.FK_SvyazVesyVinty_Vesy">
+            <End Role="Vesy" EntitySet="Vesy" />
+            <End Role="SvyazVesyVinty" EntitySet="SvyazVesyVinty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SvyazVesyVinty_Vinty" Association="Self.FK_SvyazVesyVinty_Vinty">
+            <End Role="Vinty" EntitySet="Vinty" />
+            <End Role="SvyazVesyVinty" EntitySet="SvyazVesyVinty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vesy_tip_vesov" Association="Self.FK_Vesy_tip_vesov">
+            <End Role="tip_vesov" EntitySet="tip_vesov" />
+            <End Role="Vesy" EntitySet="Vesy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vesy_Truba" Association="Self.FK_Vesy_Truba">
+            <End Role="AerodinamicheskieTruby" EntitySet="AerodinamicheskieTruby" />
+            <End Role="Vesy" EntitySet="Vesy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sibnia_practicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AerodinamicheskieTruby">
+          <Key>
+            <PropertyRef Name="id_truba" />
+          </Key>
+          <Property Name="id_truba" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazvanie_truby" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vesy" Relationship="Self.FK_Vesy_Truba" FromRole="AerodinamicheskieTruby" ToRole="Vesy" />
+        </EntityType>
+        <EntityType Name="Graduirovki">
+          <Key>
+            <PropertyRef Name="id_graduirovka" />
+          </Key>
+          <Property Name="id_graduirovka" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_vesy" Type="Int32" />
+          <Property Name="nazvanie_graduirovki" Type="String" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Name="data_graduirovki" Type="DateTime" Precision="0" />
+          <Property Name="dannye" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vesy" Relationship="Self.FK_Graduirovki_Vesy" FromRole="Graduirovki" ToRole="Vesy" />
+        </EntityType>
+        <EntityType Name="ModeliSamolyotov">
+          <Key>
+            <PropertyRef Name="id_model" />
+          </Key>
+          <Property Name="id_model" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazvanie_modeli" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nomer_modeli" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vesy" Relationship="Self.SvyazVesyModeli" FromRole="ModeliSamolyotov" ToRole="Vesy" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tip_vesov">
+          <Key>
+            <PropertyRef Name="id_tip_vesov" />
+          </Key>
+          <Property Name="id_tip_vesov" Type="Int32" Nullable="false" />
+          <Property Name="tip_vesov1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vesy" Relationship="Self.FK_Vesy_tip_vesov" FromRole="tip_vesov" ToRole="Vesy" />
+        </EntityType>
+        <EntityType Name="Vesy">
+          <Key>
+            <PropertyRef Name="id_vesy" />
+          </Key>
+          <Property Name="id_vesy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazvanie_vesov" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_truba" Type="Int32" />
+          <Property Name="kolichestvo_komponent" Type="Int32" />
+          <Property Name="komponenty" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="put_pasporta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="put_chertezha" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_tip_vesov" Type="Int32" />
+          <NavigationProperty Name="AerodinamicheskieTruby" Relationship="Self.FK_Vesy_Truba" FromRole="Vesy" ToRole="AerodinamicheskieTruby" />
+          <NavigationProperty Name="Graduirovki" Relationship="Self.FK_Graduirovki_Vesy" FromRole="Vesy" ToRole="Graduirovki" />
+          <NavigationProperty Name="tip_vesov" Relationship="Self.FK_Vesy_tip_vesov" FromRole="Vesy" ToRole="tip_vesov" />
+          <NavigationProperty Name="ModeliSamolyotov" Relationship="Self.SvyazVesyModeli" FromRole="Vesy" ToRole="ModeliSamolyotov" />
+          <NavigationProperty Name="Vinty" Relationship="Self.SvyazVesyVinty" FromRole="Vesy" ToRole="Vinty" />
+        </EntityType>
+        <EntityType Name="Vinty">
+          <Key>
+            <PropertyRef Name="id_vint" />
+          </Key>
+          <Property Name="id_vint" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomer_vinta" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vesy" Relationship="Self.SvyazVesyVinty" FromRole="Vinty" ToRole="Vesy" />
+        </EntityType>
+        <Association Name="FK_Vesy_Truba">
+          <End Role="AerodinamicheskieTruby" Type="Self.AerodinamicheskieTruby" Multiplicity="0..1" />
+          <End Role="Vesy" Type="Self.Vesy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AerodinamicheskieTruby">
+              <PropertyRef Name="id_truba" />
+            </Principal>
+            <Dependent Role="Vesy">
+              <PropertyRef Name="id_truba" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Graduirovki_Vesy">
+          <End Role="Vesy" Type="Self.Vesy" Multiplicity="0..1" />
+          <End Role="Graduirovki" Type="Self.Graduirovki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vesy">
+              <PropertyRef Name="id_vesy" />
+            </Principal>
+            <Dependent Role="Graduirovki">
+              <PropertyRef Name="id_vesy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vesy_tip_vesov">
+          <End Role="tip_vesov" Type="Self.tip_vesov" Multiplicity="0..1" />
+          <End Role="Vesy" Type="Self.Vesy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tip_vesov">
+              <PropertyRef Name="id_tip_vesov" />
+            </Principal>
+            <Dependent Role="Vesy">
+              <PropertyRef Name="id_tip_vesov" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SvyazVesyModeli">
+          <End Role="ModeliSamolyotov" Type="Self.ModeliSamolyotov" Multiplicity="*" />
+          <End Role="Vesy" Type="Self.Vesy" Multiplicity="*" />
+        </Association>
+        <Association Name="SvyazVesyVinty">
+          <End Role="Vesy" Type="Self.Vesy" Multiplicity="*" />
+          <End Role="Vinty" Type="Self.Vinty" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="sibnia_practicaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AerodinamicheskieTruby" EntityType="Self.AerodinamicheskieTruby" />
+          <EntitySet Name="Graduirovki" EntityType="Self.Graduirovki" />
+          <EntitySet Name="ModeliSamolyotov" EntityType="Self.ModeliSamolyotov" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tip_vesov" EntityType="Self.tip_vesov" />
+          <EntitySet Name="Vesy" EntityType="Self.Vesy" />
+          <EntitySet Name="Vinty" EntityType="Self.Vinty" />
+          <AssociationSet Name="FK_Vesy_Truba" Association="Self.FK_Vesy_Truba">
+            <End Role="AerodinamicheskieTruby" EntitySet="AerodinamicheskieTruby" />
+            <End Role="Vesy" EntitySet="Vesy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Graduirovki_Vesy" Association="Self.FK_Graduirovki_Vesy">
+            <End Role="Vesy" EntitySet="Vesy" />
+            <End Role="Graduirovki" EntitySet="Graduirovki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vesy_tip_vesov" Association="Self.FK_Vesy_tip_vesov">
+            <End Role="tip_vesov" EntitySet="tip_vesov" />
+            <End Role="Vesy" EntitySet="Vesy" />
+          </AssociationSet>
+          <AssociationSet Name="SvyazVesyModeli" Association="Self.SvyazVesyModeli">
+            <End Role="ModeliSamolyotov" EntitySet="ModeliSamolyotov" />
+            <End Role="Vesy" EntitySet="Vesy" />
+          </AssociationSet>
+          <AssociationSet Name="SvyazVesyVinty" Association="Self.SvyazVesyVinty">
+            <End Role="Vesy" EntitySet="Vesy" />
+            <End Role="Vinty" EntitySet="Vinty" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище sibnia_practicaModelContainer" CdmEntityContainer="sibnia_practicaEntities">
+          <EntitySetMapping Name="AerodinamicheskieTruby">
+            <EntityTypeMapping TypeName="sibnia_practicaModel.AerodinamicheskieTruby">
+              <MappingFragment StoreEntitySet="AerodinamicheskieTruby">
+                <ScalarProperty Name="id_truba" ColumnName="id_truba" />
+                <ScalarProperty Name="nazvanie_truby" ColumnName="nazvanie_truby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Graduirovki">
+            <EntityTypeMapping TypeName="sibnia_practicaModel.Graduirovki">
+              <MappingFragment StoreEntitySet="Graduirovki">
+                <ScalarProperty Name="id_graduirovka" ColumnName="id_graduirovka" />
+                <ScalarProperty Name="id_vesy" ColumnName="id_vesy" />
+                <ScalarProperty Name="nazvanie_graduirovki" ColumnName="nazvanie_graduirovki" />
+                <ScalarProperty Name="data_graduirovki" ColumnName="data_graduirovki" />
+                <ScalarProperty Name="dannye" ColumnName="dannye" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModeliSamolyotov">
+            <EntityTypeMapping TypeName="sibnia_practicaModel.ModeliSamolyotov">
+              <MappingFragment StoreEntitySet="ModeliSamolyotov">
+                <ScalarProperty Name="id_model" ColumnName="id_model" />
+                <ScalarProperty Name="nazvanie_modeli" ColumnName="nazvanie_modeli" />
+                <ScalarProperty Name="nomer_modeli" ColumnName="nomer_modeli" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="sibnia_practicaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tip_vesov">
+            <EntityTypeMapping TypeName="sibnia_practicaModel.tip_vesov">
+              <MappingFragment StoreEntitySet="tip_vesov">
+                <ScalarProperty Name="id_tip_vesov" ColumnName="id_tip_vesov" />
+                <ScalarProperty Name="tip_vesov1" ColumnName="tip_vesov" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vesy">
+            <EntityTypeMapping TypeName="sibnia_practicaModel.Vesy">
+              <MappingFragment StoreEntitySet="Vesy">
+                <ScalarProperty Name="id_vesy" ColumnName="id_vesy" />
+                <ScalarProperty Name="nazvanie_vesov" ColumnName="nazvanie_vesov" />
+                <ScalarProperty Name="id_truba" ColumnName="id_truba" />
+                <ScalarProperty Name="kolichestvo_komponent" ColumnName="kolichestvo_komponent" />
+                <ScalarProperty Name="komponenty" ColumnName="komponenty" />
+                <ScalarProperty Name="put_pasporta" ColumnName="put_pasporta" />
+                <ScalarProperty Name="put_chertezha" ColumnName="put_chertezha" />
+                <ScalarProperty Name="id_tip_vesov" ColumnName="id_tip_vesov" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vinty">
+            <EntityTypeMapping TypeName="sibnia_practicaModel.Vinty">
+              <MappingFragment StoreEntitySet="Vinty">
+                <ScalarProperty Name="id_vint" ColumnName="id_vint" />
+                <ScalarProperty Name="nomer_vinta" ColumnName="nomer_vinta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SvyazVesyModeli" TypeName="sibnia_practicaModel.SvyazVesyModeli" StoreEntitySet="SvyazVesyModeli">
+            <EndProperty Name="ModeliSamolyotov">
+              <ScalarProperty Name="id_model" ColumnName="id_model" />
+            </EndProperty>
+            <EndProperty Name="Vesy">
+              <ScalarProperty Name="id_vesy" ColumnName="id_vesy" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SvyazVesyVinty" TypeName="sibnia_practicaModel.SvyazVesyVinty" StoreEntitySet="SvyazVesyVinty">
+            <EndProperty Name="Vesy">
+              <ScalarProperty Name="id_vesy" ColumnName="id_vesy" />
+            </EndProperty>
+            <EndProperty Name="Vinty">
+              <ScalarProperty Name="id_vint" ColumnName="id_vint" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,169 @@
+﻿<Page x:Class="Sibnia.Pages.AddEditVesy"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="Добавление/Редактирование весов"
+      Background="#FFF5F5F5" d:DesignHeight="554.0" d:DesignWidth="400">
+
+    <Border Margin="10" Padding="15" Background="White" CornerRadius="5">
+        <Grid Margin="0,0,-5,-15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <TextBlock Text="Весы" 
+                       Grid.Row="0"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0,0,0,15"
+                       Foreground="#FF333333"/>
+
+            <!-- Название весов -->
+            <StackPanel Grid.Row="1" Margin="0,0,0,10">
+                <TextBlock Text="Название весов*" 
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,3"/>
+                <TextBox Text="{Binding nazvanie_vesov}"
+                         Padding="8"
+                         BorderBrush="#FFCCCCCC"/>
+            </StackPanel>
+
+            <!-- Тип весов -->
+            <StackPanel Grid.Row="2" Margin="0,0,0,10">
+                <TextBlock Text="Тип весов*" 
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,3"/>
+                <ComboBox ItemsSource="{Binding TipyVesov}"
+                          SelectedItem="{Binding tip_vesov}"
+                          x:Name="cmbtip_vesov"
+                          DisplayMemberPath="tip_vesov1"
+                          Padding="8"
+                          BorderBrush="#FFCCCCCC"/>
+            </StackPanel>
+
+            <!-- Количество компонентов -->
+            <StackPanel Grid.Row="3" Margin="0,0,0,10">
+                <TextBlock Text="Количество компонентов*" 
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,3"/>
+
+                <TextBox Text="{Binding kolichestvo_komponent}"
+                         Padding="8"
+                         BorderBrush="#FFCCCCCC"/>
+            </StackPanel>
+
+            <!-- Название трубы -->
+            <StackPanel Grid.Row="4" Margin="0,0,0,10">
+                <TextBlock Text="Труба" 
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,3"/>
+                <ComboBox ItemsSource="{Binding Truby}"
+                          
+                          x:Name="cmbtruba"
+                          SelectedItem="{Binding AerodinamicheskieTruby}"
+                          DisplayMemberPath="nazvanie_truby"
+                          Padding="8"
+                          BorderBrush="#FFCCCCCC"/>
+            </StackPanel>
+
+            <!-- Путь к паспорту -->
+            <StackPanel Grid.Row="5" Margin="0,0,0,10">
+                <TextBlock Text="Путь к паспорту" 
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,3"/>
+                <DockPanel>
+                    <Button DockPanel.Dock="Right" 
+                            Content="Обзор..." 
+                            Padding="8,2"
+                            Margin="5,0,0,0"
+                            x:Name="Browsepassport"
+                            Width="80"
+                            Click="Browsepassport_Click"/>
+                    <TextBox
+                        x:Name="passport"
+                        Text="{Binding put_pasporta}"
+                             Padding="8"
+                             BorderBrush="#FFCCCCCC"/>
+                </DockPanel>
+            </StackPanel>
+
+            <!-- Путь к чертежу -->
+            <StackPanel Grid.Row="6" Margin="0,0,0,15">
+                <TextBlock Text="Путь к чертежу" 
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,3"/>
+                <DockPanel>
+                    <Button DockPanel.Dock="Right" 
+                            Content="Обзор..." 
+                            Padding="8,2"
+                            Margin="5,0,0,0"
+                            x:Name="BrowseDrawing"
+                            Width="80"
+                            Click="BrowseDrawing_Click"/>
+                    <TextBox x:Name="chertezha" 
+                        Text="{Binding put_chertezha}"
+                             Padding="8"
+                             BorderBrush="#FFCCCCCC"/>
+
+                </DockPanel>
+
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,15" Grid.Row="7">
+                <TextBlock Text="Компоненты" 
+               FontWeight="SemiBold"
+               Margin="0,0,0,3"/>
+                <TextBox    x:Name="components" 
+                        Text="{Binding komponenty}"
+                             Padding="8"
+                             BorderBrush="#FFCCCCCC"/>
+            </StackPanel>
+            <!-- Кнопки действий -->
+            <StackPanel Grid.Row="8" 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Right">
+
+                <Button Content="Удалить" 
+          Padding="15,5"
+          MinWidth="100"
+          x:Name="Del"
+          Background="#FF0078D7"
+          Foreground="White"
+          FontWeight="SemiBold"
+          Margin="0,0,10,0"
+          Click="Del_Click"/>
+
+
+                <Button Content="Сохранить" 
+                        Padding="15,5"
+                        MinWidth="100"
+                        x:Name="Save"
+                        Background="#FF0078D7"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        Margin="0,0,10,0"
+                        Click="Save_Click"/>
+
+                <Button Content="Отмена" 
+                        Padding="15,5"
+                        x:Name="Cancel"
+                        MinWidth="100"
+                        Background="White"
+                        BorderBrush="#FFCCCCCC"
+                        Foreground="#FF333333"
+                        Click="Cancel_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Page>

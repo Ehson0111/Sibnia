@@ -1,0 +1,41 @@
+﻿<Page x:Class="Sibnia.Pages.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Sibnia.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Page1"
+      Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Заголовок -->
+            <RowDefinition Height="*"/>
+            <!-- Кнопки -->
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <Label Content="Практика Бобоев Э." 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               FontSize="30" 
+               FontWeight="Bold" 
+               Grid.Row="0" 
+               Margin="0,20,0,20"/>
+
+       
+
+            <!-- Блок кнопок -->
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="btnVesy" Content="Весы" Width="200" Height="40" Click="btnVesy_Click" Margin="0,5"/>
+            <Button x:Name="btnModel" Content="Модели самолетов" Width="200" Height="40" Click="btnModel_Click" Margin="0,5"/>
+            <Button x:Name="btnVinty" Content="Винты" Width="200" Height="40" Click="btnVinty_Click" Margin="0,5"/>
+            <Button x:Name="btnGradiurovka" Content="Градуировки" Width="200" Height="40" Click="btnGradiurovka_Click" Margin="0,5"/>
+            <Button x:Name="btnTruba" Content="Труба" Width="200" Height="40" Click="btnTruba_Click" Margin="0,5"/>
+        </StackPanel>
+
+    </Grid>
+</Page>
