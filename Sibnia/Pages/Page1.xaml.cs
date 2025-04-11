@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sibnia.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,8 @@ namespace Sibnia.Pages
         {
             NavigationService.Navigate(new TrubyPage());
 
+            //var vesy = Helpel.GetContext().ModeliSamolyotov.FirstOrDefault(x => x.id_model == 1).Vesy.First().nazvanie_vesov;
+            //MessageBox.Show("ВЕсы" + vesy);
         }
     }
 }

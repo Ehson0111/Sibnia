@@ -22,29 +22,48 @@ namespace Sibnia.Pages
     /// </summary>
     public partial class ModelyPage : Page
     {
-        private static sibnia_practicaEntities db;
+        private sibnia_practicaEntities db = new sibnia_practicaEntities(); 
         public ModelyPage()
         {
             InitializeComponent();
 
-            db = new sibnia_practicaEntities();
+           
             //DataContext = db.ModeliSamolyotov.ToList();
             LoadData();
-        
+
         }
 
         private void LoadData()
         {
-            var Vesy = db.ModeliSamolyotov.ToList();
+            db?.Dispose();
 
-            employeesDataGrid.ItemsSource = Vesy; // Привязка данных к Lis
+            // Создаем новый контекст
+            db = new sibnia_practicaEntities();
+
+            // Загружаем данные с отслеживанием изменений
+            var model = db.ModeliSamolyotov
+
+                .AsNoTracking() // Отключаем отслеживание для повышения производительности
+                .ToList();
+
+            // Полностью обновляем ItemsSource
+            employeesDataGrid.ItemsSource = null;
+            employeesDataGrid.ItemsSource = model;
+            //employeesDataGrid.ItemsSource = model; // Привязка данных к Lis
         }
 
         private void employeesDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            if (employeesDataGrid.SelectedItem != null)
+            {
+                var selected = employeesDataGrid.SelectedItem as dynamic;
+                if (selected != null)
+                {
+                    int idmodels = selected.id_model;
+                    NavigationService.Navigate(new addEditModel(idmodels));
+                }
+            }
         }
-
 
         private void employeesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -54,6 +73,19 @@ namespace Sibnia.Pages
         private void adduser_Click(object sender, RoutedEventArgs e)
         {
 
+            NavigationService.Navigate(new addEditModel());
+
+        }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Helpel.GetContext().ChangeTracker.Entries().ToList().ForEach(entry => entry.Reload());
+
+                LoadData();
+
+            }
         }
     }
 }

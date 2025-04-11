@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Sibnia.Pages"
       mc:Ignorable="d" 
       Background="White"
-      d:DesignHeight="246.96" d:DesignWidth="388.7"
+      d:DesignHeight="307.96" d:DesignWidth="382.7"
       Title="addEditModel">
     <Border Margin="10" Padding="15" Background="White" CornerRadius="5">
         <Grid Margin="0,0,-5,-15">
@@ -40,58 +40,6 @@
                      BorderBrush="#FFCCCCCC"/>
             </StackPanel>
 
-            <!-- Тип весов -->
-
-            <!-- Количество компонентов -->
-            <!--
-            <StackPanel Grid.Row="3" Margin="0,0,0,10">
-                <TextBlock Text="Количество компонентов*" 
-                       FontWeight="SemiBold"
-                       Margin="0,0,0,3"/>
-
-                <TextBox Text="{Binding kolichestvo_komponent}"
-                     Padding="8"
-                     BorderBrush="#FFCCCCCC"/>
-            </StackPanel>
-
-            -->
-            <!-- Название трубы -->
-            <!--
-            <StackPanel Grid.Row="4" Margin="0,0,0,10">
-                <TextBlock Text="Труба" 
-                       FontWeight="SemiBold"
-                       Margin="0,0,0,3"/>
-                <ComboBox ItemsSource="{Binding Truby}"
-                      
-                      x:Name="cmbtruba"
-                      SelectedItem="{Binding AerodinamicheskieTruby}"
-                      DisplayMemberPath="nazvanie_truby"
-                      Padding="8"
-                      BorderBrush="#FFCCCCCC"/>
-            </StackPanel>
-
-            -->
-            <!-- Путь к паспорту -->
-            <!--
-            <StackPanel Grid.Row="5" Margin="0,0,0,10">
-                <TextBlock Text="Путь к паспорту" 
-                       FontWeight="SemiBold"
-                       Margin="0,0,0,3"/>
-                <DockPanel>
-                    <Button DockPanel.Dock="Right" 
-                        Content="Обзор..." 
-                        Padding="8,2"
-                        Margin="5,0,0,0"
-                        x:Name="Browsepassport"
-                        Width="80"
-                        Click="Browsepassport_Click"/>
-                    <TextBox
-                    x:Name="passport"
-                    Text="{Binding put_pasporta}"
-                         Padding="8"
-                         BorderBrush="#FFCCCCCC"/>
-                </DockPanel>
-            </StackPanel>-->
 
 
 
@@ -101,11 +49,23 @@
                 <TextBlock Text="Номер моделя" 
            FontWeight="SemiBold"
            Margin="0,0,0,3"/>
-                <TextBox    x:Name="components" 
-                    Text="{Binding nomer_modeli}"
+                <TextBox                        Text="{Binding nomer_modeli}"
                          Padding="8"
                          BorderBrush="#FFCCCCCC"/>
             </StackPanel>
+            <StackPanel Grid.Row="3" Margin="0,0,0,10">
+                <TextBlock Text="Весы*" 
+                FontWeight="SemiBold"
+                Margin="0,0,0,3"/>
+
+                <ComboBox ItemsSource="{Binding nazvanie_vesov}"
+               SelectedItem="{Binding Vesy}"
+               x:Name="cmbtip_vesov"
+               DisplayMemberPath="nazvanie_vesov"
+               Padding="8"
+               BorderBrush="#FFCCCCCC"/>
+            </StackPanel>
+
             <!-- Кнопки действий -->
             <StackPanel Grid.Row="8" 
                     Orientation="Horizontal" 

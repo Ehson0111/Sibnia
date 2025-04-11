@@ -22,11 +22,12 @@ namespace Sibnia.Pages
     /// </summary>
     public partial class VesyPage : Page
     {
-        private static sibnia_practicaEntities db = new sibnia_practicaEntities();
+        private sibnia_practicaEntities db = new sibnia_practicaEntities();
         public VesyPage()
         {
 
             InitializeComponent();
+            
             //datagridVesy.ItemsSource= db.Vesy.ToList();
             //DataContext= db.Vesy.ToList();
             LoadData();
@@ -34,10 +35,21 @@ namespace Sibnia.Pages
 
         private void LoadData()
         {
-            var Vesy=db.Vesy.ToList();
+            // Освобождаем старый контекст
+            db?.Dispose();
 
-            employeesDataGrid.ItemsSource = Vesy; // Привязка данных к ListView
+            // Создаем новый контекст
+            db = new sibnia_practicaEntities();
 
+            // Загружаем данные с отслеживанием изменений
+            var Vesy = db.Vesy
+             
+                .AsNoTracking() // Отключаем отслеживание для повышения производительности
+                .ToList();
+
+            // Полностью обновляем ItemsSource
+            employeesDataGrid.ItemsSource = null;
+            employeesDataGrid.ItemsSource = Vesy;
         }
         private void employeesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
