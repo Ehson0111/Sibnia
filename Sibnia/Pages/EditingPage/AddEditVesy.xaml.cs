@@ -190,12 +190,25 @@ namespace Sibnia.Pages
 
         private void Del_Click(object sender, RoutedEventArgs e)
         {
+
+            try
+            {
+                 
             var vesy =_db.Vesy.Find(_vesuId);
             //_db = new sibnia_practicaEntities();
             _db.Vesy.Remove(vesy);
             _db.SaveChanges();
 
             NavigationService.GoBack();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Ошибка удаление т.к"+ex);
+                //throw;
+            }
         }
     }
+
 }

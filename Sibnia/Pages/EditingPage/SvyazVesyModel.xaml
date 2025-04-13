@@ -3,14 +3,85 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Sibnia.Pages.EditingPage"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="SvyazVesyModel"
-      
+      Title="Привязка весов к модели"
       Background="White">
 
-    <Grid>
-        
-    </Grid>
+    <Border Margin="10" Padding="15" Background="White" CornerRadius="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок страницы -->
+            <TextBlock Text="Привязка весов к модели" 
+                       Grid.Row="0"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0,0,0,15"
+                       Foreground="#FF333333"/>
+
+            <!-- Информация о модели -->
+            <StackPanel Grid.Row="1" Margin="0,0,0,15">
+                <TextBlock Text="Модель самолёта:" FontWeight="SemiBold"/>
+                <TextBlock x:Name="txtModelName" FontSize="14" Margin="0,5,0,0"/>
+                <TextBlock x:Name="txtModelNumber" FontSize="12" Foreground="Gray"/>
+            </StackPanel>
+
+            <!-- Выбор аэродинамических весов (ComboBox) -->
+            <StackPanel Grid.Row="2" Margin="0,0,0,15">
+                <TextBlock Text="Весы для аэродинамических характеристик (1 шт):" 
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,5"/>
+                <ComboBox x:Name="comboAeroVesy"
+                          DisplayMemberPath="nazvanie_vesov"
+                          SelectedValuePath="id_vesy"
+                          Padding="8"
+                          BorderBrush="#FFCCCCCC"/>
+            </StackPanel>
+
+            <!-- Выбор весов для винтов (ListView с CheckBox) -->
+            <StackPanel Grid.Row="3" Margin="0,0,0,15">
+                <TextBlock Text="Весы для винтовых характеристик (выбирайте несколько):" 
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,5"/>
+                <ListView x:Name="listVintVesy"
+                          SelectionMode="Multiple"
+                          Height="150"
+                          BorderBrush="#FFCCCCCC"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding nazvanie_vesov}" 
+                                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                      Margin="5,2"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+            <!-- Кнопки действий -->
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Сохранить" 
+                        Padding="15,5"
+                        MinWidth="100"
+                        Margin="0,0,10,0"
+                        Click="Save_Click"
+                        Background="#FF0078D7"
+                        Foreground="White"
+                        FontWeight="SemiBold"/>
+                <Button Content="Отмена" 
+                        Padding="15,5"
+                        MinWidth="100"
+                        Click="Cancel_Click"
+                        Background="White"
+                        BorderBrush="#FFCCCCCC"
+                        Foreground="#FF333333"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Page>
