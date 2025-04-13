@@ -56,5 +56,7 @@ namespace Sibnia.Pages
             //var vesy = Helpel.GetContext().ModeliSamolyotov.FirstOrDefault(x => x.id_model == 1).Vesy.First().nazvanie_vesov;
             //MessageBox.Show("ВЕсы" + vesy);
         }
+
+
     }
 }

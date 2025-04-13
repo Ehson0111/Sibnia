@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="VintyPage"
       
-      Background="White"
+      Background="White" IsVisibleChanged="Page_IsVisibleChanged_1"
       >
 
 
@@ -52,32 +52,10 @@
                   Margin="0,0,0,10" />-->
 
                             <TextBlock FontWeight="Bold" >
-                               <Run Text="Название весов: " />
-                              <Run Text="{Binding nazvanie_vesov}" />
+                               <Run Text="Название винта: " />
+                              <Run Text="{Binding nomer_vinta}" />
                             </TextBlock>
-                            <TextBlock>
-                              
-                                <Run Text="Тип весов "/>
-                                <Run Text="{Binding Path=tip_vesov.tip_vesov1}" />
-                            </TextBlock>
-
-                            <TextBlock >
-                                <Run  Text="Количество компонентов" />
-                                <Run  Text="{Binding Path=kolichestvo_komponent}" />
-
-                            </TextBlock>
-
-                            <TextBlock  >
-                                <Run Text="Путь паспорта " />
-                                <Run Text="{Binding put_pasporta}" />
-
-                            </TextBlock>
-
-                            <TextBlock >
-                                <Run Text="Название трубы " />
-                                <Run Text="{Binding Path=AerodinamicheskieTruby.nazvanie_truby}" />
-
-                            </TextBlock>
+                             
                         </StackPanel>
                     </Border>
                 </DataTemplate>

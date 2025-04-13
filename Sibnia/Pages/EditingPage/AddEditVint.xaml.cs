@@ -1,5 +1,4 @@
 ﻿using Sibnia.Models;
-using Sibnia.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,39 +14,38 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Sibnia.Pages
+namespace Sibnia.Pages.EditingPage
 {
     /// <summary>
-    /// Логика взаимодействия для addEditModel.xaml
+    /// Логика взаимодействия для AddEditVint.xaml
     /// </summary>
-    public partial class addEditModel : Page
+    public partial class AddEditVint : Page
     {
-
-        bool isnewmodels;
+        bool isnewobject;
         //public  MyProperty { get; set; }
 
 
-        int idmodels;
+        int idcurrent;
         private sibnia_practicaEntities db = new sibnia_practicaEntities();
-        public addEditModel()
+
+        public AddEditVint()
         {
             InitializeComponent();
-            isnewmodels = true;
-            DataContext = new ModeliSamolyotov();
+
+            isnewobject = true;
+            DataContext = new Vinty();
 
 
             Del.Visibility = Visibility.Hidden;
-
         }
-
-        public addEditModel(int id)
+        public AddEditVint(int id)
         {
             InitializeComponent();
-            idmodels = id;
-            isnewmodels = false;
+
+            idcurrent = id;
+            isnewobject = false;
 
             LoadData();
-
         }
         private void LoadData()
         {
@@ -55,12 +53,12 @@ namespace Sibnia.Pages
             try
             {
 
-                var models = db.ModeliSamolyotov.FirstOrDefault(x => x.id_model == idmodels);
+                var models = db.Vinty.FirstOrDefault(x => x.id_vint == idcurrent);
 
                 if (models == null)
                 {
 
-                    MessageBox.Show("Модель не найден");
+                    MessageBox.Show("Не найдено");
                     NavigationService.GoBack();
                     return;
                 }
@@ -76,15 +74,15 @@ namespace Sibnia.Pages
             }
 
 
-            //cmbtip_vesov.ItemsSource=db.Vesy.ToList();
-                    //cmbtip_vesov.ItemsSource = _db.tip_vesov.ToList();
+            //cmbtip_vesov.ItemsSource = db.Vesy.ToList();
+            //cmbtip_vesov.ItemsSource = _db.tip_vesov.ToList();
         }
 
         private void Del_Click(object sender, RoutedEventArgs e)
         {
 
-            var modelsam = db.ModeliSamolyotov.Find(idmodels);
-            db.ModeliSamolyotov.Remove(modelsam);
+            var modelsam = db.Vinty.Find(idcurrent);
+            db.Vinty.Remove(modelsam);
             db.SaveChanges();
 
             MessageBox.Show("Успешно ");
@@ -97,7 +95,7 @@ namespace Sibnia.Pages
         {
             try
             {
-                var model = DataContext as ModeliSamolyotov;
+                var model = DataContext as Vinty;
                 if (model == null)
                 {
                     MessageBox.Show("Ошибка данных модели!");
@@ -105,39 +103,39 @@ namespace Sibnia.Pages
                 }
 
                 // Валидация данных
-                if (string.IsNullOrWhiteSpace(model.nazvanie_modeli))
+                if (string.IsNullOrWhiteSpace(model.nomer_vinta))
                 {
-                    MessageBox.Show("Введите название модели!");
+                    MessageBox.Show("Введите номер!");
                     return;
                 }
                 //var vesy = Helpel.GetContext().ModeliSamolyotov.FirstOrDefault(x => x.id_model == 1).Vesy.First().nazvanie_vesov;
                 //MessageBox.Show("ВЕсы" + vesy);
-                
 
 
-                if (string.IsNullOrWhiteSpace(model.nomer_modeli))
-                {
-                    MessageBox.Show("Введите номер модели!");
-                    return;
-                }
 
-                if (isnewmodels)
+                //if (string.IsNullOrWhiteSpace(model.nomer_modeli))
+                //{
+                //    MessageBox.Show("Введите номер модели!");
+                //    return;
+                //}
+
+                if (isnewobject)
                 {
                     // Для новой модели
-                    db.ModeliSamolyotov.Add(model);
+                    db.Vinty.Add(model);
                 }
                 else
                 {
                     // Для редактирования существующей
-                    var editmodel = db.ModeliSamolyotov.Find(idmodels);
+                    var editmodel = db.Vinty.Find(idcurrent);
                     if (editmodel == null)
                     {
-                        MessageBox.Show("Модель не найдена!");
+                        MessageBox.Show("Не найдено ");
                         return;
                     }
 
-                    editmodel.nazvanie_modeli = model.nazvanie_modeli;
-                    editmodel.nomer_modeli = model.nomer_modeli;
+                    editmodel.nomer_vinta = model.nomer_vinta;
+                    //editmodel.nomer_modeli = model.nomer_modeli;
                 }
 
                 db.SaveChanges();
@@ -154,6 +152,6 @@ namespace Sibnia.Pages
         {
             NavigationService.GoBack();
         }
+
     }
 }
-

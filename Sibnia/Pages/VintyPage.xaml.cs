@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Sibnia.Models;
+using Sibnia.Pages.EditingPage;
+using Sibnia.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +23,47 @@ namespace Sibnia.Pages
     /// </summary>
     public partial class VintyPage : Page
     {
+
+        private sibnia_practicaEntities db;
         public VintyPage()
         {
             InitializeComponent();
+            DataContext = new Vinty();
+            db=new sibnia_practicaEntities();
+            LoadData(); 
+
+
         }
+
+        private void LoadData() {
+
+            db?.Dispose();
+
+            // Создаем новый контекст
+            db = new sibnia_practicaEntities();
+
+            // Загружаем данные с отслеживанием изменений
+            var viny = db.Vinty
+
+                .AsNoTracking() // Отключаем отслеживание для повышения производительности
+                .ToList();
+
+            // Полностью обновляем ItemsSource
+            employeesDataGrid.ItemsSource = null;
+            employeesDataGrid.ItemsSource = viny;
+            //employeesDataGrid.ItemsSource = model; // Привязка данных к Lis
+
+
+        }
+        private void adduser_Click(object sender, RoutedEventArgs e)
+        {
+
+            NavigationService.Navigate(new AddEditVint());
+
+        }
+         
+
+
 
         private void employeesDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -32,6 +72,15 @@ namespace Sibnia.Pages
 
         private void employeesDataGrid_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
+            if (employeesDataGrid.SelectedItem != null)
+            {
+                var selectedEmployee = employeesDataGrid.SelectedItem as dynamic;
+                if (selectedEmployee != null)
+                {
+                    int vesyid = selectedEmployee.id_vint; // Получение ID сотрудника
+                    NavigationService.Navigate(new AddEditVint(vesyid)); // Переход на страницу редактирования
+                }
+            }
 
         }
 
@@ -40,8 +89,15 @@ namespace Sibnia.Pages
 
         }
 
-        private void adduser_Click(object sender, RoutedEventArgs e)
+        private void Page_IsVisibleChanged_1(object sender, DependencyPropertyChangedEventArgs e)
         {
+            if (Visibility == Visibility.Visible)
+            {
+                Helpel.GetContext().ChangeTracker.Entries().ToList().ForEach(entry => entry.Reload());
+
+                LoadData();
+
+            }
 
         }
     }

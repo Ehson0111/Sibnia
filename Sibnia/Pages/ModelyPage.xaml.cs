@@ -87,5 +87,10 @@ namespace Sibnia.Pages
 
             }
         }
+
+        private void joinmodel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

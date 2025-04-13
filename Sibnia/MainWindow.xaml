@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sibnia"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="База данных весы" Height="450" Width="800" Icon="/Resources/OIP.jpg">
     <Grid>
         <Grid.RowDefinitions>
             <!--<ColumnDefinition Height="50"/>-->

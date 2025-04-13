@@ -1,4 +1,5 @@
 ﻿using Sibnia.Models;
+using Sibnia.Pages.EditingPage;
 using Sibnia.Services;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,7 @@ namespace Sibnia.Pages
                 if (selected != null)
                 {
                     int idmodels = selected.id_truba;
-                    NavigationService.Navigate(new (idmodels));
+                    NavigationService.Navigate(new AddEdiTruba(idmodels));
                 }
             }
         }
@@ -68,11 +69,12 @@ namespace Sibnia.Pages
         private void adduser_Click(object sender, RoutedEventArgs e)
         {
 
-            NavigationService.Navigate(new addEditModel());
+            NavigationService.Navigate(new AddEdiTruba());
 
         }
+         
 
-        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void Page_IsVisibleChanged_1(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible)
             {
@@ -82,9 +84,5 @@ namespace Sibnia.Pages
 
             }
         }
-
-
-
-
     }
 }

@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TrubyPage"
-      Background="White"
+      Background="White" IsVisibleChanged="Page_IsVisibleChanged_1"
       >
 
     <Grid>

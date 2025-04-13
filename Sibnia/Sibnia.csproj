@@ -70,6 +70,15 @@
     <Compile Include="Pages\EditingPage\addEditModel.xaml.cs">
       <DependentUpon>addEditModel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EditingPage\AddEdiTruba.xaml.cs">
+      <DependentUpon>AddEdiTruba.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditingPage\AddEditVint.xaml.cs">
+      <DependentUpon>AddEditVint.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditingPage\SvyazVesyModel.xaml.cs">
+      <DependentUpon>SvyazVesyModel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\Helpel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -87,7 +96,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\EditingPage\AddEdiTruba.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\EditingPage\AddEditVesy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditingPage\AddEditVint.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditingPage\SvyazVesyModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,6 +239,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\OIP.jpg" />
     <Resource Include="Resources\logo-sibnia.jpg" />
   </ItemGroup>
   <ItemGroup>

@@ -49,7 +49,9 @@
 
 
         </ListView>
+        
         <Button x:Name="adduser" Content="Добавить" Margin="289,8,30,4" Grid.Column="1" Click="adduser_Click" Grid.Row="1"/>
+        <Button x:Name="SvyasVesyModel" Content="Привязать весы" Margin="30,8,230,4" Grid.Column="0" Click="joinmodel_Click" Grid.Row="1"/>
 
     </Grid>
 </Page>

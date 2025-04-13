@@ -30,7 +30,7 @@
 
             <!-- Блок кнопок -->
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="btnTruba" Content="Труба" Width="200" Height="40" Click="btnTruba_Click" Margin="0,5"/>
+            <Button x:Name="btnTruba" Content="Аэродинамические трубы" Width="200" Height="40" Click="btnTruba_Click" Margin="0,5"/>
 
             <Button x:Name="btnVesy" Content="Весы" Width="200" Height="40" Click="btnVesy_Click" Margin="0,5"/>
             <Button x:Name="btnModel" Content="Модели самолетов" Width="200" Height="40" Click="btnModel_Click" Margin="0,5"/>
