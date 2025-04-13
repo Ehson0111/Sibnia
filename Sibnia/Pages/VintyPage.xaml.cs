@@ -100,5 +100,24 @@ namespace Sibnia.Pages
             }
 
         }
+
+        private void showsvyaz_Click(object sender, RoutedEventArgs e)
+        {
+            if (employeesDataGrid.SelectedItem is Vinty selectedVesy)
+            {
+                NavigationService.Navigate(new VintyVesyDisplayPage(selectedVesy.id_vint));
+            }
+            else
+            {
+                MessageBox.Show("Выберите весы!");
+            }
+        }
+
+
+        private void privyzatvesam_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new BindVintyToVesyPage());
+
+        }
     }
 }

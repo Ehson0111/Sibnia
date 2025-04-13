@@ -76,11 +76,17 @@
     <Compile Include="Pages\EditingPage\AddEditVint.xaml.cs">
       <DependentUpon>AddEditVint.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EditingPage\BindVintyToVesyPage.xaml.cs">
+      <DependentUpon>BindVintyToVesyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EditingPage\SvyazVesyModel.xaml.cs">
       <DependentUpon>SvyazVesyModel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EditingPage\VesyDisplayPage.xaml.cs">
       <DependentUpon>VesyDisplayPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditingPage\VintyVesyDisplayPage.xaml.cs">
+      <DependentUpon>VintyVesyDisplayPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Helpel.cs" />
     <Page Include="MainWindow.xaml">
@@ -111,11 +117,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\EditingPage\BindVintyToVesyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\EditingPage\SvyazVesyModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EditingPage\VesyDisplayPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditingPage\VintyVesyDisplayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

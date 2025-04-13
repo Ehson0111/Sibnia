@@ -1,0 +1,41 @@
+﻿<Page x:Class="Sibnia.Pages.BindVintyToVesyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Sibnia.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BindVintyToVesyPage"
+      Background="White">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Выбор весов -->
+        <StackPanel Grid.Row="0" Margin="0 0 0 10">
+            <TextBlock Text="Выберите весы:"/>
+            <ComboBox x:Name="cbVesy" DisplayMemberPath="nazvanie_vesov"/>
+        </StackPanel>
+
+        <!-- Список винтов -->
+        <ListView x:Name="lvVinty" Grid.Row="1" SelectionMode="Multiple">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Content="{Binding nomer_vinta}" 
+                              IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Сохранить" Click="Save_Click" Margin="0 10 10 0" Width="100"/>
+            <Button Content="Отмена" Click="Cancel_Click" Margin="10 10 0 0" Width="100"/>
+        </StackPanel>
+    </Grid>
+</Page>

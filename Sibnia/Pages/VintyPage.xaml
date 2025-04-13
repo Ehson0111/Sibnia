@@ -1,4 +1,4 @@
-﻿<Page x:Class="Sibnia.Pages.VintyPage"
+﻿ <Page x:Class="Sibnia.Pages.VintyPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -21,16 +21,6 @@
             <ColumnDefinition Width="361*"/>
             <ColumnDefinition Width="439*"/>
         </Grid.ColumnDefinitions>
-        <!--<DataGrid x:Name="datagridVesy" d:ItemsSource="{d:SampleData ItemCount=5}" AutoGenerateColumns="False">
-            <DataGrid.Columns >
-                <DataGridTextColumn Header="Название весов" Binding="{Binding Path=nazvanie_vesov}" />
-                <DataGridTextColumn Header="Тип весов" Binding="{Binding Path=tip_vesov.tip_vesov1}" />
-                <DataGridTextColumn Header="Количество компонентов" Binding="{Binding Path=kolichestvo_komponent}" />
-                <DataGridTextColumn Header="Путь паспрота" Binding="{Binding Path=put_pasporta}" />
-                <DataGridTextColumn Header="Путь чертежа " Binding="{Binding Path=put_chertezha}" />
-                <DataGridTextColumn Header="Название трубы" Binding="{Binding Path=AerodinamicheskieTruby.nazvanie_truby}" />
-            </DataGrid.Columns>
-        </DataGrid>-->
 
         <ListView x:Name="employeesDataGrid" Grid.RowSpan="2" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="employeesDataGrid_MouseDoubleClick_1"
                   SelectionChanged="employeesDataGrid_SelectionChanged"
@@ -63,7 +53,19 @@
 
 
         </ListView>
-        <Button x:Name="adduser" Content="Добавить" Margin="289,8,30,4" Grid.Column="1" Click="adduser_Click" Grid.Row="1"/>
-
+        <!--<StackPanel Grid.Column="1" Grid.Ro>-->
+            <Button x:Name="adduser" Content="Добавить" Margin="289,8,30,4" Grid.Column="1" Click="adduser_Click" Grid.Row="1"/>
+            <Button x:Name="privyzatvesam" Content=" Привязать к весам" Grid.Column="0"  HorizontalAlignment="Left" Click="privyzatvesam_Click" Grid.Row="1" Margin="10,11,0,7"/>
+            <!--<Button x:Name="showsvyaz" Content="Покать связь" Grid.Column="0"  HorizontalAlignment="Right" Click="privyzatvesam_Click" Grid.Row="1" Margin="0,11,0,7" Width="84"/>-->
+        <!-- В существующем XAML добавьте -->
+        <Button x:Name="showsvyaz" 
+        Content="Показать связи" 
+        Grid.Column="0"  
+        HorizontalAlignment="Right" 
+        Click="showsvyaz_Click" 
+        Grid.Row="1" 
+        Margin="0,11,0,7" 
+        Width="84"/>
+        <!--</StackPanel>-->
     </Grid>
 </Page>
