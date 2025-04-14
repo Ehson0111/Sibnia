@@ -45,7 +45,7 @@ namespace Sibnia.Pages
         /// <param name="vesyid"></param>
         public AddEditVesy(int vesyid)
         {
-         
+
             InitializeComponent();
             _db = new sibnia_practicaEntities();
             _vesuId = vesyid;
@@ -193,19 +193,19 @@ namespace Sibnia.Pages
 
             try
             {
-                 
-            var vesy =_db.Vesy.Find(_vesuId);
-            //_db = new sibnia_practicaEntities();
-            _db.Vesy.Remove(vesy);
-            _db.SaveChanges();
 
-            NavigationService.GoBack();
+                var vesy = _db.Vesy.Find(_vesuId);
+                //_db = new sibnia_practicaEntities();
+                _db.Vesy.Remove(vesy);
+                _db.SaveChanges();
+
+                NavigationService.GoBack();
 
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show("Ошибка удаление т.к"+ex);
+                MessageBox.Show("Ошибка удаление т.к" + ex);
                 //throw;
             }
         }

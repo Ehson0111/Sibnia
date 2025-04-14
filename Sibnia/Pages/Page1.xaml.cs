@@ -45,7 +45,7 @@ namespace Sibnia.Pages
 
         private void btnGradiurovka_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Gradiurovka());
+            NavigationService.Navigate(new GraduationListPage());
 
         }
 

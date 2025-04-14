@@ -1,13 +1,14 @@
-﻿<Page x:Class="Sibnia.Pages.VintyPage"
+﻿<Page x:Class="Sibnia.Pages.GraduationListPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Sibnia.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="VintyPage"
-      Background="White" IsVisibleChanged="Page_IsVisibleChanged_1">
+      Title="GraduationListPage"
+      Background="White"
+      d:DesignHeight="450" d:DesignWidth="800" IsVisibleChanged="Page_IsVisibleChanged">
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -23,8 +24,8 @@
                   Grid.Row="0" 
                   Grid.ColumnSpan="2"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                  MouseDoubleClick="employeesDataGrid_MouseDoubleClick_1"
-                  SelectionChanged="employeesDataGrid_SelectionChanged">
+                  MouseDoubleClick="employeesDataGrid_MouseDoubleClick" 
+                  SelectionMode="Single">
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Template">
@@ -71,8 +72,16 @@
                             Width="200">
                         <StackPanel>
                             <TextBlock FontWeight="Bold">
-                               <Run Text="Название винта: " />
-                              <Run Text="{Binding nomer_vinta}" />
+                                <Run Text="Название весы: "/>
+                                <Run Text="{Binding Path=Vesy.nazvanie_vesov}"/>
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="Номер градиуровки: "/>
+                                <Run Text="{Binding nazvanie_graduirovki}"/>
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="Дата градиуровки : "/>
+                                <Run Text="{Binding data_graduirovki}"/>
                             </TextBlock>
                         </StackPanel>
                     </Border>
@@ -80,31 +89,30 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Кнопка для привязки к весам -->
-        <Button x:Name="privyzatvesam" 
-                Content="Привязать к весам" 
+         <!--Кнопка для перехода к привязке весов--> 
+        <Button x:Name="Export" 
+                Content="Экспортировать" 
                 Margin="10,5" 
                 Grid.Row="1" 
                 Grid.Column="0"
                 HorizontalAlignment="Left"
                 Padding="15,5"
                 MinWidth="120"
-                Click="privyzatvesam_Click"
-                ToolTip="Выберите винт из списка выше"/>
+                Click="Export_Click"
+                ToolTip="Выберите модель из списка выше"/>
 
-        <!-- Кнопка для отображения связей -->
-        <Button x:Name="showsvyaz" 
-                Content="Показать связи" 
+        <!-- Кнопка для отображения привязанных весов -->
+        <!--<Button x:Name="SvyasView" 
+                Content="Показать связы" 
                 Margin="10,5" 
                 Grid.Row="1" 
                 Grid.Column="0"
                 HorizontalAlignment="Center"
                 Padding="15,5"
                 MinWidth="120"
-                Click="showsvyaz_Click"
-                ToolTip="Выберите винт из списка выше"/>
+                Click="joinmodel_Click"
+                ToolTip="Выберите модель из списка выше"/>-->
 
-        <!-- Кнопка для добавления -->
         <Button x:Name="adduser" 
                 Content="Добавить" 
                 Margin="10,5" 

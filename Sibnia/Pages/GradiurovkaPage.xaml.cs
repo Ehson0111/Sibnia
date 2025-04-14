@@ -25,10 +25,11 @@ namespace Sibnia.Pages
         private Dictionary<string, Dictionary<string, double>> _originalData;
         private int _graduationId;
 
-        public Gradiurovka()
+        public Gradiurovka(int graduationId)
         {
             InitializeComponent();
-            Loaded += MainWindow_Loaded;
+            _graduationId = graduationId;
+            Loaded += (s, e) => LoadGraduationData();
         }
 
 
@@ -41,16 +42,21 @@ namespace Sibnia.Pages
         {
             using (var context = new sibnia_practicaEntities())
             {
-                var graduation = context.Graduirovki.FirstOrDefault();
-                if (graduation != null && !string.IsNullOrEmpty(graduation.dannye))
+                var graduation = context.Graduirovki
+                    .FirstOrDefault(g => g.id_graduirovka == _graduationId);
+                if (graduation != null)
                 {
-                    _graduationId = graduation.id_graduirovka;
-                    _originalData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, double>>>(graduation.dannye);
-                    DisplayData(_originalData);
-                }
-                else
-                {
-                    MessageBox.Show("No graduation data found");
+
+                    if (graduation != null && !string.IsNullOrEmpty(graduation.dannye))
+                    {
+                        _graduationId = graduation.id_graduirovka;
+                        _originalData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, double>>>(graduation.dannye);
+                        DisplayData(_originalData);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No graduation data found");
+                    }
                 }
             }
         }
