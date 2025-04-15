@@ -46,7 +46,7 @@ namespace Sibnia.Pages.EditingPage
 
                 // Загружаем все аэродинамические весы
                 var aeroVesy = db.Vesy
-                                .Where(v => v.id_tip_vesov == 1)
+                                .Where(v => v.id_tip_vesov == 1 || v.id_tip_vesov==2) 
                                 .ToList();
                 comboAeroVesy.ItemsSource = aeroVesy;
 

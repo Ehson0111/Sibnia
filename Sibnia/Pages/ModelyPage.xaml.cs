@@ -48,6 +48,8 @@ namespace Sibnia.Pages
         private void adduser_Click(object sender, RoutedEventArgs e)
         {
             // Здесь код для добавления новой модели (реализация по необходимости)
+
+            NavigationService.Navigate(new addEditModel());
         }
 
         private void employeesDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

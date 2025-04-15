@@ -94,6 +94,9 @@
     <Compile Include="Pages\GraduationListPage.xaml.cs">
       <DependentUpon>GraduationListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Otcket.xaml.cs">
+      <DependentUpon>Otcket.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\Helpel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -152,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ModelyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Otcket.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

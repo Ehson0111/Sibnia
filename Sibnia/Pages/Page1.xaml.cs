@@ -57,6 +57,9 @@ namespace Sibnia.Pages
             //MessageBox.Show("ВЕсы" + vesy);
         }
 
-
+        private void btnOtclet_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Otcket());
+        }
     }
 }

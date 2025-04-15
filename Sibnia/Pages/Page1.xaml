@@ -36,8 +36,8 @@
             <Button x:Name="btnModel" Content="Модели самолетов" Width="200" Height="40" Click="btnModel_Click" Margin="0,5"/>
             <Button x:Name="btnVinty" Content="Винты" Width="200" Height="40" Click="btnVinty_Click" Margin="0,5"/>
             <Button x:Name="btnGradiurovka" Content="Градуировки" Width="200" Height="40" Click="btnGradiurovka_Click" Margin="0,5"/>
-            <Button x:Name="btnOtclet" Content="Отчеты" Width="200" Height="40" Click="btnTruba_Click" Margin="0,5"/>
-            <Button x:Name="btnSearch" Content="Поиск" Width="200" Height="40" Click="btnTruba_Click" Margin="0,5"/>
+            <Button x:Name="btnOtclet" Content="Отчеты" Width="200" Height="40" Click="btnOtclet_Click" Margin="0,5"/>
+            <!--<Button x:Name="btnSearch" Content="Поиск" Width="200" Height="40" Click="btnTruba_Click" Margin="0,5"/>-->
         </StackPanel>
 
     </Grid>
