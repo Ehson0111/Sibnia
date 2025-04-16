@@ -96,6 +96,8 @@
   - Градуировкам по датам
   - Моделям с привязанными весами
 -Экспорт в PDF, Назад
- 
+
+
+ [🎥 Смотреть видео на Google Drive](https://drive.google.com/file/d/1RsLcfIdUjUkrqiBYPzJ9CB3BXYCDWHET/view?usp=sharing)
 
  
